@@ -25,29 +25,40 @@ export class HomePage implements OnInit {
   constructor(public alertController: AlertController) {
 
   }
-  public start_stop() {
-    if (this.contador === 0) {
-      this.contador = setInterval(() => { this.segundos += 1; }, 1000);
-      console.log('Cronometro iniciado');
-      this.colors = 'warning'; // cambio de color dinamico del boton iniciar
-      this.texto = 'pause-outline'; // cambio de texto dinamico del boton iniciar
-    } else if (this.contador !== 0) {
-      clearInterval(this.contador);
-      this.contador = null;
-      console.log('Cronometro Detenido');
-      this.colors = 'success';
-      this.texto = 'play-outline';
-    }
-  }
+  //Reiniciar todos los parametros a 0
   restart() {
-    this.segundos = 0;
-    console.log('Cronometro Reiniciado');
+    clearInterval(this.contador);
+    this.datos.numero = null;
     this.Numerito = null;
     this.oxigeno = null;
     this.color = null;
+    this.colors = 'success';
+    this.texto = 'play-outline';
+    this.contador = null;
+    this.segundos = 0;
+    console.log('Cronometro Reiniciado');
+  }
+  pause() {
+    this.colors = 'success';
+    this.texto = 'play-outline';
+    clearInterval(this.contador);
+    this.contador = null;
+  }
+  start_stop() {
+    if (this.contador === null) {
+      this.contador = setInterval(() => { this.segundos += 1; }, 1000);
+      console.log('Cronometro Iniciado');
+      this.colors = 'warning'; // cambio de color dinamico del boton iniciar
+      this.texto = 'pause-outline'; // cambio de texto dinamico del boton iniciar
+    } else if (this.contador !== null) {
+      console.log('Cronometro Pausado');
+      this.pause();
+    }
   }
   //#endregion
   ngOnInit() {
+    //Al iniciar la app, esto se ejecutara
+    this.restart();
   }
   onSubmitTemplate() {
     console.log('Form submit');
@@ -75,6 +86,7 @@ export class HomePage implements OnInit {
       message: this.oxigeno,
       buttons: ['Bien']
     });
+    this.restart();
 
     await alert.present();
   }
