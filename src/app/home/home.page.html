@@ -28,7 +28,7 @@
     <ion-card >
       <ion-card-header>
         <ion-card-title>
-          Instrucciones
+          INSTRUCCIONES
         </ion-card-title>
       </ion-card-header>
     <ion-grid>
@@ -58,12 +58,10 @@
 
     <ion-card>
       <ion-card-header>
-        <ion-card-title>
-          Paso #1
-        </ion-card-title>
+        <ion-card-title>Paso #1</ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        Contar en voz alta hasta el numero 30 en el menor tiempo posible.
+        Contar en voz alta hasta 30 en el mayor tiempo posible.
       </ion-card-content>
       <ion-item >
         <ion-icon class="cronometro" name="stopwatch-outline" slot="start"></ion-icon>
@@ -77,29 +75,26 @@
     <!--INPUT donde se obtienen los numero contados-->
     <ion-card>
       <ion-card-header>
-        <ion-card-title>
-          Paso #2
-        </ion-card-title>
+        <ion-card-title>Paso #2</ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        Ingresa los numeros que se alcanzaron a contar en el lapso de 30 segundos.
+        Ingresa los numeros que se alcanzaron a contar al poner pausa.
       </ion-card-content>
       <ion-range min="0" max="30" pin color="secondary" [(ngModel)]="Numerito" [ngModelOptions]="{standalone: true}">
         <ion-icon slot="start" size="small" name="remove-circle-outline"></ion-icon>
         <ion-icon slot="end" name="add-circle-outline"></ion-icon>
       </ion-range>
     </ion-card>   
-
     <ion-card>
       <ion-card-header>
-        <ion-card-title>
-          Paso #3
-        </ion-card-title>
+        <ion-card-title>Paso #3</ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        En este paso el tiempo que hiciste y los numeros que se contaro se usaran para calcular tu capacidad pulmonar aproximada.
+        En este paso, el tiempo que hiciste y los numeros que contaro se usaran para calcular la capacidad pulmonar aproximada.
       </ion-card-content>
-      <ion-button expand="block" type="submit" (click)="Oxigeno()">Calcular</ion-button>  <!-- Boton para CHECAR resultados -->
+      <ion-item>
+        <ion-button slot="end" type="submit" (click)="Oxigeno()">RESULTADO</ion-button><!-- Boton para CHECAR resultados -->
+      </ion-item> 
     </ion-card>
   </form>
   
@@ -113,26 +108,28 @@
         </ion-thumbnail>
         <ion-label>
           <h3>Descargo de responsabilidad</h3>
-          <p>La Escala de Roth es una de</p> 
-          <p>telemedicina de bajo y</p> 
-          <p>fácil utilización utilizada para</p>  
-          <p>estratificar la severidad de la</p>
-          <p>respiratoria (disnea) en función</p>
-          <p>los niveles bajos de oxigenación</p>
-          <p>(Hipoxia). Aunque se ha establecido</p> 
-          <p>una fuerte correlación entre la</p> 
-         <p>disnea y la hipoxia; esta prueba</p>
-          <p>intenta reemplazar la revisión</p>
-          <p>ni el diagnóstico sobre la</p>
-          <p>respiratoria efectuado por un</p> 
-           <p>de la medicina. Su uso se limita</p> 
-          <p>a poder identificar pacientes en</p> 
-          <p>riesgo de desarrollar o tener</p> 
-          <p>disnea severa y constituye únicamente</p> 
-           <p>un indicador para buscar ayuda</p> 
-          <p>médica profesional.</p>
         </ion-label>
       </ion-item>
+      <ion-card-content>
+        La Escala de Roth es una de 
+        telemedicina de bajo y 
+        fácil utilización utilizada para  
+        estratificar la severidad de la
+        respiratoria (disnea) en función
+        los niveles bajos de oxigenación
+        (Hipoxia). Aunque se ha establecido 
+        una fuerte correlación entre la 
+        disnea y la hipoxia; esta prueba
+        intenta reemplazar la revisión
+        ni el diagnóstico sobre la
+        respiratoria efectuado por un 
+        de la medicina. Su uso se limita 
+        a poder identificar pacientes en 
+        riesgo de desarrollar o tener 
+        disnea severa y constituye únicamente 
+        un indicador para buscar ayuda 
+        médica profesional.
+      </ion-card-content>
     </ion-card>
   
     <ion-card>
@@ -196,28 +193,34 @@
         </ion-card-subtitle>
       </ion-card-header>
       <ion-item >
-        <ion-icon name="person" slot="start"></ion-icon>
         <ion-label>Omar Villanueva</ion-label>
+        <ion-icon name="logo-facebook" slot="end"></ion-icon>
       </ion-item>
       <ion-item >
-        <ion-icon name="person" slot="start"></ion-icon>
         <ion-label>Rodrigo Colin</ion-label>
+        <ion-icon name="logo-instagram" slot="end"></ion-icon>
+        <ion-icon name="logo-facebook" slot="end"></ion-icon>
       </ion-item>
       <ion-item >
-        <ion-icon name="person" slot="start"></ion-icon>
         <ion-label>Manuel Acosta</ion-label>
+        <ion-icon name="logo-twitter" slot="end"></ion-icon>
       </ion-item>
       <ion-item >
-        <ion-icon name="person" slot="start"></ion-icon>
         <ion-label>Alejandro Laguna</ion-label>
+        <ion-icon name="logo-linkedin" slot="end"></ion-icon>
+        <ion-icon name="logo-github" slot="end"></ion-icon>
+        <ion-icon name="logo-twitter" slot="end"></ion-icon>
       </ion-item>
       <ion-item >
-        <ion-icon name="person" slot="start"></ion-icon>
         <ion-label>Gerardo Martínez</ion-label>
+        <ion-icon name="logo-linkedin" slot="end"></ion-icon>
+        <ion-icon name="logo-instagram" slot="end"></ion-icon>
       </ion-item>
       <ion-item >
-        <ion-icon name="person" slot="start"></ion-icon>
         <ion-label>Hector Romero</ion-label>
+        <ion-icon name="logo-linkedin" slot="end"></ion-icon>
+        <ion-icon name="logo-instagram" slot="end"></ion-icon>
+        <ion-icon name="logo-github" slot="end"></ion-icon>
       </ion-item>
     </ion-card>
   </div>
