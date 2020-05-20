@@ -1,88 +1,222 @@
-<ion-header class="ion-no-border" mode="ios">
+<ion-header class="ion-no-border" translucent>
   <ion-toolbar>
-    <ion-buttons slot="end">
-      <ion-button color="primary" routerLink="/informacion">
-        <ion-icon name="information-circle-outline" ></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-title>Prueba ROTH en COVID-19</ion-title>
+    <ion-title>Prueba ROTH</ion-title>
   </ion-toolbar>
+  <ion-toolbar>
+    <ion-segment value="all">
+    <ion-segment-button (click)="segmentChanged('instrucciones')" value="instrucciones" >
+      <ion-label>INSTRUCCIONES</ion-label>
+    </ion-segment-button>
+    <ion-segment-button (click)="segmentChanged('prueba')" value="prueba">
+      <ion-label>PRUEBA</ion-label>
+    </ion-segment-button>
+    <ion-segment-button (click)="segmentChanged('info')" value="info">
+      <ion-icon name="information-circle-outline" ></ion-icon>
+    </ion-segment-button>
+  </ion-segment>
+  </ion-toolbar>
+  
 </ion-header>
 
 
 <ion-content fullscreen="true">
-  <ion-card>
+  <!-- INSTRUCCIONES  -->
+  <div *ngIf="segmento == 'instrucciones'">
+    <ion-card >
     <ion-grid>
       <ion-row>
         <ion-col size="4">
           <img src="assets/medico.png">
         </ion-col>
-  
         <ion-col>
           <br>
           <ion-label class="texto">Solicite al paciente que tome una respiración profunda y cuente en voz alta hasta el numero 30 tan rápido como sea posible sin volver a tomar aire.</ion-label>
         </ion-col>
       </ion-row>
-  
       <ion-row>
         <ion-col>
           <br>
           <ion-label class="texto">Detenga el cronómetro cuando el paciente ya no pueda seguir contando o llegue al número 30.</ion-label>
         </ion-col>
-  
         <ion-col size="4">
           <img src="assets/comunicaciones.png">
         </ion-col>
       </ion-row>
     </ion-grid>
   </ion-card>
-  
-      <!--Inicio-->
-  
-    
-    <ion-list-header>
-      <ion-title>Segundos</ion-title>
-    </ion-list-header>
-  
+  </div>
+  <!-- PRUEBA -->
+  <div *ngIf="segmento == 'prueba'">
 
-  <ion-item> <!--CONTADOR del cronometro que se muestra en pantalla-->
-    <ion-label class="cronometro">{{segundos}}</ion-label>
-  </ion-item>
-
-  <ion-grid>
-    <ion-row> <!--Botones del CRONOMETRO-->
-      <ion-col col-1>   <!--Boton de iniciar/parar-->
-        <ion-button (click)='start_stop()' expand='block' color='{{colors}}' fill='outline'>{{texto}}</ion-button>
-      </ion-col>
-      <ion-col col-1>   <!--Boton de reiniciar-->
-        <ion-button (click)='restart()' expand='block' color='danger' fill='outline'>Reiniciar</ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>
+          Paso #1
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        Contar en voz alta hasta el numero 30 en el menor tiempo posible.
+      </ion-card-content>
+      <ion-item >
+        <ion-icon class="cronometro" name="stopwatch-outline" slot="start"></ion-icon>
+        <ion-label class="cronometro" slot="start">{{ segundos }}</ion-label><!--CONTADOR del cronometro que se muestra en pantalla-->
+        <ion-icon class="cronometro" slot="end" (click)='start_stop()' [name]="texto" [color]='colors'></ion-icon>
+        <ion-icon class="cronometro" slot="end" (click)='restart()' name="stop-circle-outline" color='danger'></ion-icon>
+      </ion-item>
+    </ion-card>
 
   <form #formulario="ngForm" (ngSubmit)="onSubmitTemplate()">
     <!--INPUT donde se obtienen los numero contados-->
-    <ion-list>
-      <ion-item>
-        <ion-label class="tiempo">Números contados:</ion-label>
-        <br>
-        <ion-input type="number"
-                   placeholder="Ingrese aquí el número"
-                   [(ngModel)]="Numerito" 
-                   [ngModelOptions]="{standalone: true}">
-               </ion-input>
-      </ion-item>
-    </ion-list>
-    <!-- Boton para CHECAR resultados -->
-    <ion-button expand= "block" type="submit" (click)="Oxigeno()">
-    Calcular
-    </ion-button>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>
+          Paso #2
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        Ingresa los numeros que se alcanzaron a contar en el lapso de 30 segundos.
+      </ion-card-content>
+      <ion-range min="0" max="30" pin color="secondary" [(ngModel)]="Numerito" [ngModelOptions]="{standalone: true}">
+        <ion-icon slot="start" size="small" name="remove-circle-outline"></ion-icon>
+        <ion-icon slot="end" name="add-circle-outline"></ion-icon>
+      </ion-range>
+    </ion-card>   
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>
+          Paso #3
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        En este paso el tiempo que hiciste y los numeros que se contaro se usaran para calcular tu capacidad pulmonar aproximada.
+      </ion-card-content>
+      <ion-button expand="block" type="submit" (click)="Oxigeno()">Calcular</ion-button>  <!-- Boton para CHECAR resultados -->
+    </ion-card>
   </form>
   
-  <ion-item color="{{color}}">  <!--Aqui puse esta variable para que cambie el color entre rojo, amarillo y verde-->
-    <ion-label class="ion-text-wrap">{{oxigeno}}</ion-label>  <!--Label donde se muestran los RESULTADOS-->
-  </ion-item>
+  </div>
+  <!-- INFORMACION -->
+  <div *ngIf="segmento == 'info'">
+    <ion-card>
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <img src="../../assets/disclaimer.gif">
+        </ion-thumbnail>
+        <ion-label>
+          <h3>Descargo de responsabilidad</h3>
+          <p>La Escala de Roth es una de</p> 
+          <p>telemedicina de bajo y</p> 
+          <p>fácil utilización utilizada para</p>  
+          <p>estratificar la severidad de la</p>
+          <p>respiratoria (disnea) en función</p>
+          <p>los niveles bajos de oxigenación</p>
+          <p>(Hipoxia). Aunque se ha establecido</p> 
+          <p>una fuerte correlación entre la</p> 
+         <p>disnea y la hipoxia; esta prueba</p>
+          <p>intenta reemplazar la revisión</p>
+          <p>ni el diagnóstico sobre la</p>
+          <p>respiratoria efectuado por un</p> 
+           <p>de la medicina. Su uso se limita</p> 
+          <p>a poder identificar pacientes en</p> 
+          <p>riesgo de desarrollar o tener</p> 
+          <p>disnea severa y constituye únicamente</p> 
+           <p>un indicador para buscar ayuda</p> 
+          <p>médica profesional.</p>
+        </ion-label>
+      </ion-item>
+
+    </ion-card>
+    
+
+    
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>Referencias</ion-card-subtitle>
+      </ion-card-header>
+      <ion-item>
+        <ion-icon name="book" slot="start"></ion-icon>
+        <ion-label>Nuevo plan para las enfermedades pulmonares</ion-label>
+        <ion-button fill="outline" slot="end" href="https://rebelem.com/rebel-cast-ep80-a-new-war-plan-for-covid-19-with-richard-levitan/?fbclid=IwAR08RVO9i1tLTWumXdSqboaGhjhOQAo7eEwCw9kcLC_bRurbqh3s297jApk" routerDirection>VER</ion-button>
+      </ion-item>    
+      <ion-card-content>
+        La economía actual de la atención médica se ha vuelto cada vez más dependiente de la atención de alto valor como una estrategia necesaria para lidiar con la escasez de recursos y la creciente demanda de los pacientes.
+      </ion-card-content>
+      <ion-item>
+        <ion-icon name="book" slot="start"></ion-icon>
+        <ion-label>Roth para evaluación de dificultad respiratoria</ion-label>
+        <ion-button fill="outline" slot="end" href="https://onlinelibrary.wiley.com/doi/full/10.1002/clc.22586" routerDirection>VER</ion-button>
+      </ion-item>
+      <ion-card-content>
+        El puntaje Roth tiene una fuerte correlación con la gravedad de la disnea según lo determinado por la hipoxia. Esta herramienta es reproducible, de baja utilización de recursos y susceptible de telemedicina.
+      </ion-card-content>
+    </ion-card>
+  
+  <!-- ASOCIACIONES  -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>
+          En asociación con
+        </ion-card-subtitle>
+      </ion-card-header>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6">
+            <img src="assets/cruzroja.png">
+          </ion-col>
+           <ion-col size="6">
+            <img src="assets/empresa.png">
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6">
+            <img src="assets/Mexico.svg">
+          </ion-col>
+          <ion-col size="4">
+            <img src="assets/tec.png">
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <img src="assets/meraki.png">
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+    <!-- LISTA DE COLABORADORES -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>
+          Colaboradores
+        </ion-card-subtitle>
+      </ion-card-header>
+      <ion-item >
+        <ion-icon name="person" slot="start"></ion-icon>
+        <ion-label>Omar Villanueva</ion-label>
+      </ion-item>
+      <ion-item >
+        <ion-icon name="person" slot="start"></ion-icon>
+        <ion-label>Rodrigo Colin</ion-label>
+      </ion-item>
+      <ion-item >
+        <ion-icon name="person" slot="start"></ion-icon>
+        <ion-label>Manuel Acosta</ion-label>
+      </ion-item>
+      <ion-item >
+        <ion-icon name="person" slot="start"></ion-icon>
+        <ion-label>Alejandro Laguna</ion-label>
+      </ion-item>
+      <ion-item >
+        <ion-icon name="person" slot="start"></ion-icon>
+        <ion-label>Gerardo Martínez</ion-label>
+      </ion-item>
+      <ion-item >
+        <ion-icon name="person" slot="start"></ion-icon>
+        <ion-label>Hector Romero</ion-label>
+      </ion-item>
+    </ion-card>
+  </div>
 
   <!-- Fin -->
-
 </ion-content>
