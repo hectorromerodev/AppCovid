@@ -5,13 +5,16 @@
   <ion-toolbar>
     <ion-segment value="all">
     <ion-segment-button (click)="segmentChanged('instrucciones')" value="instrucciones" >
-      <ion-label>INSTRUCCIONES</ion-label>
+      <!-- <ion-label>INSTRUCCIONES</ion-label> -->
+      <ion-icon name="reader-outline"></ion-icon>
     </ion-segment-button>
     <ion-segment-button (click)="segmentChanged('prueba')" value="prueba">
       <ion-label>PRUEBA</ion-label>
+      <!-- <ion-icon name="reader-outline"></ion-icon> -->
+
     </ion-segment-button>
     <ion-segment-button (click)="segmentChanged('info')" value="info">
-      <ion-icon name="information-circle-outline" ></ion-icon>
+      <ion-icon name="information-circle-outline"></ion-icon>
     </ion-segment-button>
   </ion-segment>
   </ion-toolbar>
@@ -23,6 +26,11 @@
   <!-- INSTRUCCIONES  -->
   <div *ngIf="segmento == 'instrucciones'">
     <ion-card >
+      <ion-card-header>
+        <ion-card-title>
+          Instrucciones
+        </ion-card-title>
+      </ion-card-header>
     <ion-grid>
       <ion-row>
         <ion-col size="4">
@@ -125,12 +133,8 @@
           <p>médica profesional.</p>
         </ion-label>
       </ion-item>
-
     </ion-card>
-    
-
-    
-
+  
     <ion-card>
       <ion-card-header>
         <ion-card-subtitle>Referencias</ion-card-subtitle>
